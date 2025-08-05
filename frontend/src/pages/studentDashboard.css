@@ -1,0 +1,45 @@
+.dashboard-container {
+  padding: 2rem;
+  font-family: Arial;
+}
+
+.filters {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.filters input, .filters select, .filters button {
+  padding: 8px;
+  font-size: 14px;
+}
+
+.student-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.student-card {
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 15px;
+  width: 250px;
+  background-color: #f9f9f9;
+  transition: 0.3s;
+}
+
+.student-card:hover {
+  box-shadow: 0 0 10px #aaa;
+}
+
+.student-card.highlight {
+  border-left: 6px solid green;
+  background-color: #e0ffe0;
+}
+
+.student-card.failing {
+  border-left: 6px solid red;
+  background-color: #ffe0e0;
+}
