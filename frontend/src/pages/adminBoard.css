@@ -1,0 +1,173 @@
+.adm-dashboard {
+  padding: 20px;
+}
+
+.adm-summary {
+    margin-top: 20px;
+  display:block;
+  gap: 30px;
+  overflow-y: auto; 
+  width: 500px;
+}
+
+.adm-card-fail, .top-performers, .adm-card-count{
+  background: white;
+  border-radius: 8px;
+  padding: 15px;
+  min-width: 250px;
+  box-shadow: 0 0 8px rgba(0,0,0,0.1);
+  flex-shrink: 0;
+  height: auto;
+  max-height: none; 
+  overflow: visible;
+}
+
+
+.adm-card-count h3, .adm-card-fail h3, .adm-chart-container h3, .top-performers h3 {
+  margin-top: 0;
+  border: 2px; /* border color */
+  padding: 10px 15px;        /* inner spacing */
+  background-color: #e6f0fa; /* light background */
+  color: #0d4a75;            /* text color */
+  border-radius: 0px;        /* optional rounded corners */
+  display: inline-block;     /* wrap to fit content */
+  margin-bottom: 15px;       /* spacing below */
+  font-size: 18px;
+}
+.adm-card-count{
+    margin-bottom: 20px;
+}
+.adm-card-fail{
+    margin-bottom: 10px;
+}
+.top-performers {
+  width: 470px;
+}
+.adm-failing-student,
+.adm-student-count, .top-performers {
+  margin: 5px 0;
+}
+
+.highlight {
+  background-color: #e0ffe0;
+}
+
+button {
+  margin-right: 5px;
+  background-color: #1b3b6e;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+button:hover{
+    background-color: #3671cf;
+}
+
+.adm-add-button {
+  margin: 10px 0;
+  background-color: #3b82f6;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.adm-delete-btn {
+  background-color: #ef4444;
+  color: white;
+  border: none;
+  padding: 5px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.adm-gpa-chart{
+  background: white;
+  border-radius: 8px;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 10px;
+  padding-bottom: 60px;
+  width: 500px;
+  box-shadow: 0 0 8px rgba(0,0,0,0.1);
+  flex-shrink: 0;
+  margin-bottom: 20px;
+}
+.adm-chart-container {
+  display: block;
+  width: auto;         
+  width: 500px; 
+}
+
+.adm-student-count-table, .adm-student-fail-table, .student-top-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+  font-size: 16px;
+}
+
+.adm-student-count-table th,
+.adm-student-count-table td, .adm-student-fail-table th, .adm-student-fail-table td, .student-top-table th, .adm-student-top-table td {
+  border: 1px solid #ccc;
+  padding: 10px 15px;
+  text-align: left;
+}
+
+.adm-student-count-table th, .adm-student-fail-table th, .student-top-table th{
+  background-color: #f0f8ff;
+  color: #0d4a75;
+}
+
+.adm-student-count-table tr:nth-child(even), .adm-student-fail-table tr:nth-child(even), .student-top-table tr:nth-child(even){
+  background-color: #f9f9f9;
+}
+.student-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 20px;
+  background: #f9f9f9;
+  border-radius: 8px;
+  max-width: 400px;
+  margin: auto;
+}
+
+.form-input, .form-select {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.btn {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.btn-save {
+  background: #1b3b6e;
+  color: white;
+}
+
+.btn-cancel {
+  background: #f04135;
+  color: white;
+}
+
+.adm-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

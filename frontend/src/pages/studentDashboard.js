@@ -1,119 +1,123 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import './studentDashboard.css';
+import react, { useEffect, useState} from 'react';
+import TopPerformers from './TopPerformers';
+import GPAChart from './GPAChart';
+import SearchFilterSort from './SearchFilterSort';
+import './studentBoard.css'
 
-export default function StudentDashboard() {
+const StudentDashboard = () => {
   const [students, setStudents] = useState([]);
   const [filtered, setFiltered] = useState([]);
-  const [search, setSearch] = useState('');
-  const [sortField, setSortField] = useState('');
-  const [filterDept, setFilterDept] = useState('');
-  const [filterSemester, setFilterSemester] = useState('');
+  const [deptCount, setDeptCount] = useState([]);
+  const [failingStudents, setFailingStudents] = useState([]);
+  
 
-  const fetchStudents = async () => {
-    const token = localStorage.getItem('access');
-    try {
-      const res = await axios.get('http://localhost:8000/api/students/', {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      });
-      setStudents(res.data);
-      setFiltered(res.data);
-    } catch (err) {
-      console.error('Error fetching students:', err);
-    }
-  };
 
-  useEffect(() => {
-    fetchStudents();
-  }, []);
-
-  const handleSearch = (e) => {
-    const term = e.target.value.toLowerCase();
-    setSearch(term);
-    const filteredData = students.filter(s =>
-      s.name.toLowerCase().includes(term)
-    );
-    setFiltered(filteredData);
-  };
-
-  const handleSort = (field) => {
-    setSortField(field);
-    const sorted = [...filtered].sort((a, b) => {
-      if (field === 'gpa') return b.gpa - a.gpa;
-      if (field === 'name') return a.name.localeCompare(b.name);
-      if (field === 'semester') return a.semester - b.semester;
-      return 0;
+  useEffect(()=>{
+    fetch('http://localhost:8000/students/all/')
+    .then(res => res.json())
+    .then(data=>{
+      setStudents(data);
+      setFiltered(data);
     });
-    setFiltered(sorted);
-  };
 
-  const handleFilterChange = () => {
-    let data = students;
-    if (filterDept) {
-      data = data.filter(s => s.department === filterDept);
-    }
-    if (filterSemester) {
-      data = data.filter(s => s.semester === parseInt(filterSemester));
-    }
-    if (search) {
-      data = data.filter(s => s.name.toLowerCase().includes(search));
-    }
-    setFiltered(data);
-  };
+    fetch('http://localhost:8000/students/dept-count/')
+    .then(res => res.json())
+    .then(setDeptCount);
+  
+    fetch('http://localhost:8000/students/failing/')
+    .then(res => res.json())
+    .then(setFailingStudents);
+  },[]);
 
-  useEffect(() => {
-    handleFilterChange();
-  }, [filterDept, filterSemester]);
-
-  return (
-    <div className="dashboard-container">
-      <h2>Student Dashboard</h2>
-
-      <div className="filters">
-        <input
-          type="text"
-          placeholder="Search by name"
-          value={search}
-          onChange={handleSearch}
-        />
-        <select onChange={e => setFilterDept(e.target.value)} value={filterDept}>
-          <option value="">All Departments</option>
-          <option value="CS">CS</option>
-          <option value="EE">EE</option>
-          <option value="BBA">BBA</option>
-        </select>
-        <select onChange={e => setFilterSemester(e.target.value)} value={filterSemester}>
-          <option value="">All Semesters</option>
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          {/* Add more semesters as needed */}
-        </select>
-
-        <button onClick={() => handleSort('name')}>Sort by Name</button>
-        <button onClick={() => handleSort('gpa')}>Sort by GPA</button>
-        <button onClick={() => handleSort('semester')}>Sort by Semester</button>
+    return (
+  <div className="dashboard">
+    <div className="main-content">
+      <div className="header">
+        <h1> Hello Student!</h1>
       </div>
-
+     <SearchFilterSort students={students} setFiltered={setFiltered} />
       <div className="student-list">
-        {filtered.map(student => (
-          <div
-            key={student.id}
-            className={`student-card ${
-              student.gpa >= 3.0 ? 'highlight' :
-              student.gpa < 2.0 ? 'failing' : ''
-            }`}
-          >
-            <h3>{student.name}</h3>
-            <p><strong>Roll:</strong> {student.roll_number}</p>
-            <p><strong>Dept:</strong> {student.department}</p>
-            <p><strong>Semester:</strong> {student.semester}</p>
-            <p><strong>GPA:</strong> {student.gpa}</p>
-          </div>
-        ))}
+        <div className="list-header">
+          <h3>All Students</h3>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Roll No.</th>
+              <th>Dept</th>
+              <th>Semester</th>
+              <th>GPA</th>
+            </tr>
+          </thead>
+          <tbody>
+            {filtered.map((s, idx) => (
+              <tr key={idx} className={s.gpa > 3.0 ? 'highlight' : ''}>
+                <td>{s.user.username}</td>
+                <td>{s.roll_number}</td>
+                <td>{s.department}</td>
+                <td>{s.semester}</td>
+                <td>{s.gpa}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
+      <div className="summary">
+        <div className="card-count">
+          <h3>Student Count by Department</h3>
+        <table className="student-count-table">
+  <thead>
+    <tr>
+      <th>Department</th>
+      <th>Student Count</th>
+    </tr>
+  </thead>
+  <tbody>
+    {deptCount.map((item, idx) => (
+      <tr key={idx}>
+        <td>{item.department}</td>
+        <td>{item.count}</td>
+      </tr>
+    ))}
+  </tbody>
+</table>
+        </div>
+
+        <div className="card-fail">
+          <h3>Failing Students</h3>
+          <table className='student-fail-table'>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Roll No.</th>
+                <th>Department</th>
+                <th>GPA</th>
+              </tr>
+            </thead>
+            <tbody>
+              {failingStudents.map((item, idx) => {
+              return (
+                <tr key={idx}>
+                  <td>{item.user.username}</td>
+                  <td>{item.roll_number}</td>
+                  <td>{item.department}</td>
+                  <td>{item.gpa}</td>
+                </tr>
+              );
+            })}
+          </tbody>
+          </table>
+        </div>
+      </div>
+     <div ><TopPerformers /></div>
+      <div className="chart-container">
+        <div><GPAChart /></div>
+       
+      </div>
+
     </div>
-  );
-}
+  </div>
+);
+};
+export default StudentDashboard;

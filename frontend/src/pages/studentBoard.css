@@ -1,0 +1,106 @@
+
+.dashboard {
+  padding: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color:  #e6f0fa;
+}
+
+
+.header h1 {
+  color: #204b8f;
+  margin-bottom: 25px;
+}
+
+
+.search-filter-container {
+  margin-bottom: 20px;
+}
+.apply-button {
+  margin: 10px 0;
+  background-color: #204b8f;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.apply-button:hover{
+  background-color: #2ca4d8;
+}
+
+
+/* Shared styling for all tables */
+table{
+  width: 800px;
+  border-collapse: collapse;
+  margin-top: 15px;
+  font-size: 16px;
+  background-color: white;
+  border: 1px solid #ccc;
+}
+
+/* Table headers (TH) */
+th{
+  background-color: #f0f8ff;
+  color: #0b3a5c;
+  font-weight: 600;
+  padding: 12px 16px;
+  text-align: left;
+  border: 1px solid #ccc;
+}
+
+/* Table body cells (TD) */
+td{
+  padding: 12px 16px;
+  text-align: left;
+  border: 1px solid #ccc;
+}
+
+/* Zebra striping for table rows */
+
+
+/* GPA > 3 highlight */
+.highlight {
+  background-color: #def5e1 !important;
+  font-weight: bold;
+}
+
+/* Section Headers */
+.list-header h3,
+.card-count h3,
+.card-fail h3 {
+  color: #0d4a75;
+  margin-bottom: 10px;
+  border-left: 5px solid #2ca4d8;
+  padding-left: 10px;
+}
+
+/* Count & Fail Cards */
+.card-count, .card-fail {
+  margin-top: 25px;
+  padding: 20px;
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+/* Chart and Top Performers sections */
+.chart-container {
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+@media (max-width: 768px) {
+  .dashboard {
+    padding: 10px;
+  }
+
+  table, th, td {
+    font-size: 14px;
+  }
+
+  .header h1 {
+    font-size: 24px;
+    padding: 10px 15px;
+  }
+}

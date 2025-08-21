@@ -27,12 +27,14 @@ from dj_rest_auth.views import UserDetailsView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/',include('students.urls')),
+    path('students/', include('students.urls')),
+    #path('api/',include('students.urls')),
     path('auth/', include('djoser.urls')),
     path('auth/', include('djoser.urls.jwt')),
     path('auth/jwt/create/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('auth/jwt/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('auth/jwt/verify/', TokenVerifyView.as_view(), name='token_verify'),
     path('auth/users/me/', UserDetailsView.as_view(), name='user_details'),
+
 ]
 
