@@ -1,10 +1,8 @@
 from rest_framework import viewsets
 from .models import Student
 from .serializer import StudentSerializer
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from django.contrib.auth import authenticate, login
-from django.contrib import messages
-from .models import CustomUser
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login
 from django.views.decorators.csrf import csrf_exempt
@@ -19,13 +17,6 @@ class StudentViewSet(viewsets.ModelViewSet):
     queryset = Student.objects.all()
     serializer_class = StudentSerializer
 
-    def perform_create(self, serializer):
-        if not serializer.validated_data.get('user', None) and self.request.user.is_authenticated:
-            serializer.save(user=self.request.user)
-        else:
-            serializer.save()
-
-@csrf_exempt
 def api_login(request):
     if request.method == "POST":
         data = json.loads(request.body)
@@ -39,13 +30,6 @@ def api_login(request):
             return JsonResponse({"message": "Login successful", "role": user.role})
         else:
             return JsonResponse({"message": "Invalid credentials"}, status=401)
-        if user is not None:
-            login(request, user)
-            return JsonResponse({
-            "access": access_token,
-            "refresh": refresh_token,
-            "role": user.role
-            })
 
     return JsonResponse({"message": "Only POST allowed"}, status=405)
 

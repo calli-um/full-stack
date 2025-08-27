@@ -40,7 +40,7 @@ const AdminDashboard = () => {
 
 const handleSave = (student) => {
   if (editingStudent) {
-    // update existing
+
     setStudents((prev) =>
       prev.map((s) => (s.id === student.id ? student : s))
     );
@@ -48,7 +48,7 @@ const handleSave = (student) => {
       prev.map((s) => (s.id === student.id ? student : s))
     );
   } else {
-    // add new
+
     setStudents((prev) => [...prev, student]);
     setFiltered((prev) => [...prev, student]);
   }

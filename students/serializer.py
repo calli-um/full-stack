@@ -6,7 +6,7 @@ from dj_rest_auth.serializers import UserDetailsSerializer
 class UserSerializer(serializers.ModelSerializer):
     class Meta(UserDetailsSerializer.Meta):
         model = CustomUser
-        fields = ['username', 'role']
+        fields = ['id','username', 'role']
 
 class StudentSerializer(serializers.ModelSerializer):
     user = UserSerializer(read_only=True)

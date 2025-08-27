@@ -28,8 +28,6 @@
   background-color: #2ca4d8;
 }
 
-
-/* Shared styling for all tables */
 table{
   width: 800px;
   border-collapse: collapse;
@@ -39,7 +37,6 @@ table{
   border: 1px solid #ccc;
 }
 
-/* Table headers (TH) */
 th{
   background-color: #f0f8ff;
   color: #0b3a5c;
@@ -49,23 +46,18 @@ th{
   border: 1px solid #ccc;
 }
 
-/* Table body cells (TD) */
 td{
   padding: 12px 16px;
   text-align: left;
   border: 1px solid #ccc;
 }
 
-/* Zebra striping for table rows */
 
-
-/* GPA > 3 highlight */
 .highlight {
   background-color: #def5e1 !important;
   font-weight: bold;
 }
 
-/* Section Headers */
 .list-header h3,
 .card-count h3,
 .card-fail h3 {
@@ -75,7 +67,6 @@ td{
   padding-left: 10px;
 }
 
-/* Count & Fail Cards */
 .card-count, .card-fail {
   margin-top: 25px;
   padding: 20px;
@@ -84,7 +75,6 @@ td{
   border-radius: 6px;
 }
 
-/* Chart and Top Performers sections */
 .chart-container {
   margin-bottom: 20px;
   margin-top: 20px;
